@@ -1,56 +1,31 @@
-import React, { useState, useRef } from "react";
+
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
-  const inputRef = useRef();
-  const [isLoggedIn, setLogin] = useState(false);
-  const [studentName, setStudentName] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [name, setName] = useState("");
 
-  function onFocus() {
-    const st_nm = inputRef.current.value;
-    if (st_nm == "") {
-      setLogin(false);
-      inputRef.current.focus();
-    }
-    else {
-      setLogin(true);
-      setStudentName(st_nm);
-    }
-
-
-  }
   return (
-    <>
+    <div>
       {isLoggedIn ? (
-        <div>
-          <h2>Welcome {studentName}</h2> <br />
-        </div>
-
+        <h1>Welcome Student {name}</h1>
       ) : (
-        <div>
-          <div>
-            <h2>WELCOME TO THE FORM</h2>
-          </div>
+        <>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
 
-          <div>
-            <form method="GET">
-              <label>Name:</label>
-              <input type="text" ref={inputRef} /> <br />
-              <label>Dept:</label>
-              <input type="text" /> <br />
-              <label>RollNo:</label>
-              <input type="text" /><br />
-
-              <div>
-                <button type="button" onClick={onFocus}>Login</button>
-              </div>
-
-            </form>
-          </div>
-        </div>
+          <button onClick={() => setIsLoggedIn(true)}>
+            Login
+          </button>
+        </>
       )}
-    </>
+    </div>
   );
-
 }
 
 export default App;
